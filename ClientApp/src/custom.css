@@ -3,6 +3,12 @@ a {
   color: #0366d6;
 }
 
+.threeButton {
+  align-items: center;
+  position: relative;
+  text-align: center;
+}
+
 code {
   color: #E01A76;
 }

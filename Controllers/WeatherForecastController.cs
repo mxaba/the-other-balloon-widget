@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace the_other_balloon_widget.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

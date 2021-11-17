@@ -10,7 +10,7 @@ using the_other_balloon_widget.Models.Logic;
 namespace the_other_balloon_widget.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     public class ColorController : ControllerBase
     {
         private readonly IColorLogic colorLogic;
@@ -18,11 +18,28 @@ namespace the_other_balloon_widget.Controllers
             this.colorLogic = colorLogic;
         }
 
+        [HttpPost("{color}")]
+        public string CreateUpdateColor(string color){
+            var colorModel = new Colors();
+            colorModel.Name = color;
+            colorLogic.AddColor(colorModel);
+            Console.WriteLine(colorModel.Name);
+            return "OK";
+        }
 
-        [HttpPost("AddUpdateColor")]
-        public string CreateUpdateColor([FromBody] Colors color){
-            
-            return "";
+        [HttpPut]
+        public string updateRefresh(){
+            return colorLogic.UpdatedTrending();
+        }
+
+        [HttpGet("{type}")]
+        public List<Colors> updateRefresh([FromRoute]string type){
+            return colorLogic.GetColorByType(type);
+        }
+
+        [HttpGet]
+        public IEnumerable<Colors> GetAllColors(){
+            return colorLogic.GetAllColors();
         }
 
     }

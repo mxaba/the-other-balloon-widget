@@ -7,7 +7,7 @@ namespace the_other_balloon_widget.Models
 {
     public class Colors : IColors
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public int Counter { get; set; }
         public string Type { get; set; }

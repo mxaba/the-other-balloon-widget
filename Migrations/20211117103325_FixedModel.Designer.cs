@@ -9,8 +9,8 @@ using the_other_balloon_widget.Database;
 namespace the_other_balloon_widget.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211115075338_InitModelEntityToDatabase")]
-    partial class InitModelEntityToDatabase
+    [Migration("20211117103325_FixedModel")]
+    partial class FixedModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,10 +22,8 @@ namespace the_other_balloon_widget.Migrations
 
             modelBuilder.Entity("the_other_balloon_widget.Models.Colors", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<int>("Counter")
                         .HasColumnType("integer");

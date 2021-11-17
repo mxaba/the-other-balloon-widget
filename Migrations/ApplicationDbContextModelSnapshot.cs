@@ -20,10 +20,8 @@ namespace the_other_balloon_widget.Migrations
 
             modelBuilder.Entity("the_other_balloon_widget.Models.Colors", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<int>("Counter")
                         .HasColumnType("integer");

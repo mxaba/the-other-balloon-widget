@@ -18,9 +18,29 @@ namespace the_other_balloon_widget.Models.Logic
 
         }
 
-        private int timeNow() {
-            var timeNow = DateTime.Now;
-            return (timeNow.Minute) / 1000;
+        private DateTime timeNow() {
+            var timeNow = DateTime.UtcNow;
+            // var timeNow = DateTime.Now;
+            return timeNow;
+        }
+
+        private void UpdateTheDatabase(Colors colorSub)
+        {
+            if (colorSub.Counter < 5)
+            {
+                colorSub.Type = "upAndComing";
+            }
+            else if (colorSub.Counter >= 5 && colorSub.Counter < 11)
+            {
+                colorSub.Type = "popular";
+            }
+            else if (colorSub.Counter >= 11)
+            {
+                colorSub.Type = "trending";
+            }
+            colorSub.Timestamp = timeNow();
+            _db.Colors.Update(colorSub);
+            _db.SaveChanges();
         }
 
         public string UpdatedTrending(){
@@ -41,11 +61,24 @@ namespace the_other_balloon_widget.Models.Logic
             return "Updated";
         }
 
-        public string DeleteColor(int id){
+        public void DeleteColor(int id){
             var obj = _db.Colors.Find(id);
             _db.Colors.Remove(obj);
             _db.SaveChanges();
-            return "Deleted Successfully";
+        }
+
+        public void subCurrentColor(string id){
+            var colorSub = _db.Colors.Find(id);
+            Console.WriteLine(colorSub.Counter);
+            
+            colorSub.Counter--;
+            if(colorSub.Counter == 0){
+                _db.Colors.Remove(colorSub);
+                _db.SaveChanges();
+            } else
+            {
+                UpdateTheDatabase(colorSub);
+            }
         }
 
         public List<Colors> GetColorByType(string colorType){
@@ -66,7 +99,6 @@ namespace the_other_balloon_widget.Models.Logic
             Console.WriteLine(color);
             IEnumerable<Colors> colorFromDatabase = _db.Colors;
             color.Timestamp = timeNow();
-            var guid = Guid.NewGuid();
             string message;
             var _id = "";
             
@@ -78,33 +110,22 @@ namespace the_other_balloon_widget.Models.Logic
                     break;
                 }
             }
-
             if (colorFromDatabase.Count() > 0 && _id != "")
             {
                 var currentColorUpdate = _db.Colors.Find(_id);
                 currentColorUpdate.Counter++;
-                if (currentColorUpdate.Counter >= 5 && currentColorUpdate.Counter < 11)
-                {
-                    color.Type = "popular";
-                }
-                else if (currentColorUpdate.Counter >= 11)
-                {
-                    color.Type = "trending";
-                }
-                _db.Colors.Update(color);
-                _db.SaveChanges();
+                UpdateTheDatabase(currentColorUpdate);
                 message = "Successfully Updated🥳";
             }
             else
             {
-                color.Id = guid.ToString();
-                color.Type = "upAndComing";
                 color.Counter = 1;
                 _db.Colors.Add(color);
                 _db.SaveChanges();
                 message = "Successfully Addded🥳";
             }
-            
+            Console.WriteLine(colorFromDatabase.Count());
+            Console.WriteLine(message);
             return message;
         }
 

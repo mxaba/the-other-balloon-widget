@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace the_other_balloon_widget.Migrations
 {
-    public partial class FixedModel : Migration
+    public partial class InitModelEntityToDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +15,7 @@ namespace the_other_balloon_widget.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     Counter = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<string>(type: "text", nullable: true),
-                    Timestamp = table.Column<int>(type: "integer", nullable: false)
+                    Timestamp = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {

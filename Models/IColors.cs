@@ -1,3 +1,5 @@
+using System;
+
 namespace the_other_balloon_widget.Models
 {
     public interface IColors
@@ -6,6 +8,6 @@ namespace the_other_balloon_widget.Models
         string Name { get; set; }
         int Counter { get; set; }
         string Type { get; set; }
-        int Timestamp { get; set; }
+        DateTime Timestamp { get; set; }
     }
 }

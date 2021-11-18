@@ -11,6 +11,6 @@ namespace the_other_balloon_widget.Models
         public string Name { get; set; }
         public int Counter { get; set; }
         public string Type { get; set; }
-        public int Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

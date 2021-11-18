@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { allowedColors } from "../allowedColors";
 import { Hint } from 'react-autocomplete-hint';
+import TableSections from './Tables/TableSections';
 
 const Home  = () => {
   const [stateColorName , setStateColorName] = useState("")
   const colorChangeHandler = (event) => setStateColorName(event.target.value);
-  
+
   const handleRequestClick = () => {
     const formData = new FormData();
     if (stateColorName !== ""){
@@ -17,7 +18,6 @@ const Home  = () => {
         var data = new FormData();
         
         data.append("color", name);
-        // formData.append(JSON.stringify(name));
         fetch('api/Color/CreateUpdateColor/'+name, {
             method: 'POST'
         }).then(response => response.text())
@@ -53,6 +53,10 @@ const Home  = () => {
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>
 
+            </div>
+
+            <div className="col" style={{float: "right"}}>
+            <TableSections />
             </div>
           </div>
         </div>

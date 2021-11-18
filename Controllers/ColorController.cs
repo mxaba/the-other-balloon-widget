@@ -21,10 +21,11 @@ namespace the_other_balloon_widget.Controllers
         [HttpPost("{color}")]
         public string CreateUpdateColor(string color){
             var colorModel = new Colors();
+            var guid = Guid.NewGuid();
+            colorModel.Id = guid.ToString();
             colorModel.Name = color;
-            colorLogic.AddColor(colorModel);
-            Console.WriteLine(colorModel.Name);
-            return "OK";
+            colorModel.Type = "upAndComing";            
+            return colorLogic.AddColor(colorModel);
         }
 
         [HttpPut]
@@ -33,8 +34,14 @@ namespace the_other_balloon_widget.Controllers
         }
 
         [HttpGet("{type}")]
-        public List<Colors> updateRefresh([FromRoute]string type){
+        public List<Colors> updateRefresh(string type){
             return colorLogic.GetColorByType(type);
+        }
+
+        [HttpPost("{id}")]
+        public string SubractCurrentColor(string id){
+            colorLogic.subCurrentColor(id);
+            return "";
         }
 
         [HttpGet]

@@ -28,11 +28,17 @@ namespace the_other_balloon_widget.Controllers
             return colorLogic.AddColor(colorModel);
         }
 
+        [HttpPost("{color}")]
+        public string DeleteColor(string color){
+            colorLogic.DeleteColor(color);
+            return "";
+        }
+
         [HttpPost]
         public string updateRefresh(){
             return colorLogic.UpdatedTrending();
         }
-        
+
         [HttpGet("{type}")]
         public List<Colors> updateRefresh(string type){
             return colorLogic.GetColorByType(type);

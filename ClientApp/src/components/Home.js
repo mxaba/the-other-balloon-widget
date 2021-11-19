@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { allowedColors } from "../allowedColors";
 import { Hint } from 'react-autocomplete-hint';
 import TableSections from './Tables/TableSections';
+import Chart from './Chart/Chart';
 
 const Home  = () => {
   const [stateColorName , setStateColorName] = useState("")
@@ -49,9 +50,7 @@ const Home  = () => {
                 <i class="fa fa-paper-plane" aria-hidden="true"></i>
               </button>
 
-              <button className="btn btn-outline-danger" >
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-              </button>
+              <Chart />
 
             </div>
 

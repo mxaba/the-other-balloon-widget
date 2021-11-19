@@ -31,7 +31,6 @@ function TableSections(){
     });
 
     const addCurrentColorTable = (name) => {
-        // addColor(color)
         fetch('api/Color/CreateUpdateColor/'+name, {
             method: 'POST'
         }).then(response => response.text())
@@ -39,6 +38,12 @@ function TableSections(){
 
     const subCurrentColorTable = (id) => {
         fetch('api/Color/SubractCurrentColor/'+id, {
+            method: 'POST'
+        }).then(response => response.text())
+    }
+
+    const deleteColor = (id) => {
+        fetch('api/Color/DeleteColor/'+id, {
             method: 'POST'
         }).then(response => response.text())
     }
@@ -55,6 +60,7 @@ function TableSections(){
                              {color.counter}
                             <i class="fa fa-minus" aria-hidden="true" onClick={() => subCurrentColorTable(color.id)}></i> 
                         </td>
+                        <i class="fa fa-trash-o" aria-hidden="true" onClick={() => deleteColor(color.id)}></i>
                     </tr>
                 );
                 colorRows.push(row);

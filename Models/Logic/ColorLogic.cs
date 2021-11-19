@@ -62,12 +62,8 @@ namespace the_other_balloon_widget.Models.Logic
                 if (itemColor.Type == "trending")
                 {
                     var compareTime = (timeNow().AddMinutes(-5)) > (itemColor.Timestamp);
-                    Console.WriteLine(compareTime);
-                    Console.WriteLine( new TimeSpan(0,5,0) );
-                    Console.WriteLine(compareTime);
                     if(compareTime){
                         ids.Add(itemColor.Id);
-
                     }
                 }
             }
@@ -75,8 +71,9 @@ namespace the_other_balloon_widget.Models.Logic
             return "Updated";
         }
 
-        public void DeleteColor(int id){
-            var obj = _db.Colors.Find(id);
+        public void DeleteColor(string color){
+            var obj = _db.Colors.Find(color);
+            Console.WriteLine(obj.Name);
             _db.Colors.Remove(obj);
             _db.SaveChanges();
         }

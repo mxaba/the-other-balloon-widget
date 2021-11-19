@@ -13,15 +13,19 @@ function TableSections(){
             setColors(data);
             // ...
         }
-        fetchData();
+        
         
         if (fiveMinutesLeft > 0) {
         const timerId = setTimeout(() => {
             setFiveMinutesLeft(fiveMinutesLeft - 1);
+            fetchData();
         }, 1000);
             return () => clearTimeout(timerId);
         } else {
-            // removeTrendingColor()
+                fetch('api/Color/updateRefresh', {
+                    method: 'POST'
+                }).then(response => response.text())
+
             setFiveMinutesLeft(10)
         }
     });
@@ -66,7 +70,6 @@ function TableSections(){
       
         return [hours, minutes, seconds % 60].map(format).join(':')
     }
-
     return(
         
         <table >

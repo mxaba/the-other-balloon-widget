@@ -24,15 +24,15 @@ namespace the_other_balloon_widget.Controllers
             var guid = Guid.NewGuid();
             colorModel.Id = guid.ToString();
             colorModel.Name = color;
-            colorModel.Type = "upAndComing";            
+            colorModel.Type = "upAndComing";
             return colorLogic.AddColor(colorModel);
         }
 
-        [HttpPut]
+        [HttpPost]
         public string updateRefresh(){
             return colorLogic.UpdatedTrending();
         }
-
+        
         [HttpGet("{type}")]
         public List<Colors> updateRefresh(string type){
             return colorLogic.GetColorByType(type);

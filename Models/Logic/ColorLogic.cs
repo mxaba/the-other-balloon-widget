@@ -37,27 +37,41 @@ namespace the_other_balloon_widget.Models.Logic
             else if (colorSub.Counter >= 11)
             {
                 colorSub.Type = "trending";
+                colorSub.Timestamp = timeNow();
             }
-            colorSub.Timestamp = timeNow();
             _db.Colors.Update(colorSub);
             _db.SaveChanges();
         }
 
+        private void ResetTrending(List<string> id){
+            id.ForEach((x) => {
+                var itemColor = _db.Colors.Find(x);
+                itemColor.Type = "popular";
+                itemColor.Counter = 9;
+                _db.Colors.Update(itemColor);
+                _db.SaveChanges();
+            });
+            
+        }
+
         public string UpdatedTrending(){
             IEnumerable<Colors> colorFromDatabase = _db.Colors;
+            var ids = new List<string>();
             foreach (var itemColor in colorFromDatabase)
             {
                 if (itemColor.Type == "trending")
                 {
-                    if(itemColor.Timestamp < timeNow()){
-                        itemColor.Type = "popular";
-                        itemColor.Counter = 9;
-                        _db.Colors.Update(itemColor);
-                        _db.SaveChanges();
+                    var compareTime = (timeNow().AddMinutes(-5)) > (itemColor.Timestamp);
+                    Console.WriteLine(compareTime);
+                    Console.WriteLine( new TimeSpan(0,5,0) );
+                    Console.WriteLine(compareTime);
+                    if(compareTime){
+                        ids.Add(itemColor.Id);
+
                     }
-                    // color.Id = itemColor.Id;
                 }
             }
+            ResetTrending(ids);
             return "Updated";
         }
 
@@ -96,7 +110,6 @@ namespace the_other_balloon_widget.Models.Logic
 
         public string AddColor(Colors color)
         {
-            Console.WriteLine(color);
             IEnumerable<Colors> colorFromDatabase = _db.Colors;
             color.Timestamp = timeNow();
             string message;
@@ -116,6 +129,9 @@ namespace the_other_balloon_widget.Models.Logic
                 currentColorUpdate.Counter++;
                 UpdateTheDatabase(currentColorUpdate);
                 message = "Successfully Updated🥳";
+                Console.WriteLine((currentColorUpdate.Timestamp));
+                Console.WriteLine(timeNow());
+                Console.WriteLine((currentColorUpdate.Timestamp - timeNow()) > new TimeSpan(0,5,0));
             }
             else
             {
@@ -124,8 +140,6 @@ namespace the_other_balloon_widget.Models.Logic
                 _db.SaveChanges();
                 message = "Successfully Addded🥳";
             }
-            Console.WriteLine(colorFromDatabase.Count());
-            Console.WriteLine(message);
             return message;
         }
 

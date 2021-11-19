@@ -4,11 +4,12 @@ import { Hint } from 'react-autocomplete-hint';
 import TableSections from './Tables/TableSections';
 import Chart from './Chart/Chart';
 
-const Home  = () => {
+const Home  = (props) => {
+  const { updateErrorMessage } = props
   const [stateColorName , setStateColorName] = useState("")
   const colorChangeHandler = (event) => setStateColorName(event.target.value);
 
-  const handleRequestClick = () => {
+  const handleRequestClick = async() => {
     const formData = new FormData();
     if (stateColorName !== ""){
 
@@ -19,9 +20,11 @@ const Home  = () => {
         var data = new FormData();
         
         data.append("color", name);
-        fetch('api/Color/CreateUpdateColor/'+name, {
+        await fetch('api/Color/CreateUpdateColor/'+name, {
             method: 'POST'
         }).then(response => response.text())
+      } else {
+        updateErrorMessage(`${name} is not on our list as color`);
       }
     }
   }

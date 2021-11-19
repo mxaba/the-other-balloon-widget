@@ -111,27 +111,19 @@ namespace the_other_balloon_widget.Models.Logic
             color.Timestamp = timeNow();
             string message;
             var _id = "";
-            
-            foreach (var itemColor in colorFromDatabase)
-            {
-                if (itemColor.Name == color.Name)
-                {
+            // colorFromDatabase.OrderBy(colors => colors.Timestamp).ToList();
+            foreach (var itemColor in colorFromDatabase){
+                if (itemColor.Name == color.Name) {
                     _id = itemColor.Id;
-                    break;
                 }
-            }
-            if (colorFromDatabase.Count() > 0 && _id != "")
+            } if (colorFromDatabase.Count() > 0 && _id != "")
             {
                 var currentColorUpdate = _db.Colors.Find(_id);
                 currentColorUpdate.Counter++;
+
                 UpdateTheDatabase(currentColorUpdate);
                 message = "Successfully Updated🥳";
-                Console.WriteLine((currentColorUpdate.Timestamp));
-                Console.WriteLine(timeNow());
-                Console.WriteLine((currentColorUpdate.Timestamp - timeNow()) > new TimeSpan(0,5,0));
-            }
-            else
-            {
+            } else {
                 color.Counter = 1;
                 _db.Colors.Add(color);
                 _db.SaveChanges();

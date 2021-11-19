@@ -22,28 +22,28 @@ function TableSections(){
         }, 1000);
             return () => clearTimeout(timerId);
         } else {
-                fetch('api/Color/updateRefresh', {
-                    method: 'POST'
-                }).then(response => response.text())
+            fetch('api/Color/updateRefresh', {
+                method: 'POST'
+            }).then(response => response.text())
 
             setFiveMinutesLeft(10)
         }
     });
 
-    const addCurrentColorTable = (name) => {
-        fetch('api/Color/CreateUpdateColor/'+name, {
+    const addCurrentColorTable = async (name) => {
+        await fetch('api/Color/CreateUpdateColor/'+name, {
             method: 'POST'
         }).then(response => response.text())
     }
 
-    const subCurrentColorTable = (id) => {
-        fetch('api/Color/SubractCurrentColor/'+id, {
+    const subCurrentColorTable = async (id) => {
+        await fetch('api/Color/SubractCurrentColor/'+id, {
             method: 'POST'
         }).then(response => response.text())
     }
 
-    const deleteColor = (id) => {
-        fetch('api/Color/DeleteColor/'+id, {
+    const deleteColor = async (id) => {
+        await fetch('api/Color/DeleteColor/'+id, {
             method: 'POST'
         }).then(response => response.text())
     }

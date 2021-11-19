@@ -11,7 +11,7 @@ const App = () => {
   // render () {
     return (
       <Layout>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' render={(props) => <Home updateErrorMessage={updateErrorMessage} {...props}/>} />
         {/* <Route path='/counter' component={Counter} /> */}
         {/* <Route path='/fetch-data' component={FetchData} /> */}
         <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>

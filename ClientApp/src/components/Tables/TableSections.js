@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./Table.css"
 
-function TableSections(){
+function TableSections(props){
     const [fiveMinutesLeft, setFiveMinutesLeft] = useState(30);
     const [colors , setColors] = useState([])
+    const { handleRequestClick } = props;
 
 	useEffect(() => {
         async function fetchData() {
@@ -30,12 +31,6 @@ function TableSections(){
         }
     });
 
-    const addCurrentColorTable = async (name) => {
-        await fetch('api/Color/CreateUpdateColor/'+name, {
-            method: 'POST'
-        }).then(response => response.text())
-    }
-
     const subCurrentColorTable = async (id) => {
         await fetch('api/Color/SubractCurrentColor/'+id, {
             method: 'POST'
@@ -56,7 +51,7 @@ function TableSections(){
                     <tr key={color.id}>
                         <th scope="row" style={{ color: color.name }}>{color.name}</th>
                         <td style={{ color: color.name }}> 
-                            <i class="fa fa-plus" aria-hidden="true" onClick={() => addCurrentColorTable(color.name)}></i> 
+                            <i class="fa fa-plus" aria-hidden="true" onClick={() => handleRequestClick(color.name)}></i> 
                              {color.counter}
                             <i class="fa fa-minus" aria-hidden="true" onClick={() => subCurrentColorTable(color.id)}></i> 
                         </td>

@@ -25,7 +25,8 @@ namespace the_other_balloon_widget.Controllers
             colorModel.Id = guid.ToString();
             colorModel.Name = color;
             colorModel.Type = "upAndComing";
-            return colorLogic.AddColor(colorModel);
+            var response = colorLogic.AddColor(colorModel);
+            return response;
         }
 
         [HttpPost("{color}")]

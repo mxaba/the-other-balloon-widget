@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using the_other_balloon_widget.Database;
+using the_other_balloon_widget.Models.Hubs;
 using the_other_balloon_widget.Models.Logic;
 
 namespace the_other_balloon_widget
@@ -30,6 +31,7 @@ namespace the_other_balloon_widget
 
             services.AddTransient<IColorLogic, ColorLogic>();
             services.AddTransient(typeof(IColorLogic), typeof(ColorLogic));
+            services.AddSignalR();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -63,6 +65,7 @@ namespace the_other_balloon_widget
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+                    endpoints.MapHub<ChatHub>("/hubs/chat");
             });
 
             app.UseSpa(spa =>

@@ -5,6 +5,7 @@ import { Layout } from './components/Layout';
 import  Home  from './components/Home';
 
 import './custom.css'
+import Chat from './components/ChatHub/Chat';
 
 const App = () => {
   const [errorMessage, updateErrorMessage] = useState(null);
@@ -12,7 +13,7 @@ const App = () => {
     return (
       <Layout>
         <Route exact path='/' render={(props) => <Home updateErrorMessage={updateErrorMessage} {...props}/>} />
-        {/* <Route path='/counter' component={Counter} /> */}
+        <Route path='/chatHub' render={(props) => <Chat updateErrorMessage={updateErrorMessage} {...props}/>} />
         {/* <Route path='/fetch-data' component={FetchData} /> */}
         <AlertComponent errorMessage={errorMessage} hideError={updateErrorMessage}/>
       </Layout>

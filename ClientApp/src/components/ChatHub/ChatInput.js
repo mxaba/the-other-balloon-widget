@@ -15,6 +15,7 @@ const ChatInput = (props) => {
         else {
             alert('Please insert an username and a message.');
         }
+        setMessage('')
     }
 
     const onUserUpdate = (e) => {
@@ -38,8 +39,8 @@ const ChatInput = (props) => {
             <br/>
             <label htmlFor="message">Message:</label>
             <br />
-            <input 
-                type="text"
+            <textarea 
+                type="textarea"
                 id="message"
                 name="message" 
                 value={message}

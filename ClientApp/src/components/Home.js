@@ -10,7 +10,6 @@ const Home  = (props) => {
   const colorChangeHandler = (event) => setStateColorName(event.target.value);
 
   const handleRequestClick = async(namePassed) => {
-    const formData = new FormData();
     if (namePassed !== ""){
 
       const name = namePassed.charAt(0).toUpperCase() + namePassed.slice(1);

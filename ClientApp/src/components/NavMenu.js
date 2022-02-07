@@ -32,7 +32,7 @@ export class NavMenu extends Component {
             <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
               <ul className="navbar-nav flex-grow">
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/chatHub">ChatHub</NavLink>
+                  <NavLink tag={Link} className="text-primary" to="/chatHub">ChatHub</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-dark" to="/">Hey, Welcome to the 🎈Balloon-Shop</NavLink>

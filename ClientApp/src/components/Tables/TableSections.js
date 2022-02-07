@@ -10,9 +10,12 @@ function TableSections(props){
         async function fetchData() {
             // You can await here
             const response = await fetch('api/Color/GetAllColors');
-            const data = await response.json();
-            setColors(data);
-            // ...
+            if(response.status == 200){
+                const data = await response.json();
+                setColors(data);
+            } else {
+                setColors([]);
+            }
         }
         
         

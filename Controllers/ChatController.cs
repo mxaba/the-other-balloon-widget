@@ -1,7 +1,5 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 using the_other_balloon_widget.Models.Hubs;
 using the_other_balloon_widget.Models.Clients;

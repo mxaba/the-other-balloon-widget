@@ -6,8 +6,9 @@ namespace the_other_balloon_widget.Models.Hubs
 {
     public class ChatHub : Hub<IChatClient>
     {
-        public async Task SendMessage(ChatMessage message)
+        public Task SendMessage(ChatMessage message)
         {
+            return Task.CompletedTask;
         }
     }
 }
